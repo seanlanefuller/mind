@@ -1,0 +1,535 @@
+:root {
+    --bg-color: #111827;
+    --text-primary: #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --accent-color: #2DD4BF;
+    --accent-hover: #14B8A6;
+    --card-bg: #1F2937;
+    --success-color: #34D399;
+    --error-color: #F87171;
+    --border-radius: 16px;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.app-header {
+    background: var(--card-bg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.date-display {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.clock-display {
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Main Layout */
+#main-container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hidden-section {
+    display: none;
+}
+
+.active-section {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dashboard */
+.welcome-text {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.activity-card {
+    background: var(--card-bg);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.activity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--accent-color);
+}
+
+.activity-card .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.activity-card h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+.activity-card p {
+    color: var(--text-secondary);
+}
+
+/* Game Sections Common */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+.game-area {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    min-height: 400px;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Memory Game */
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: var(--accent-color);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    user-select: none;
+}
+
+.memory-card.flipped {
+    background: white;
+    border: 2px solid var(--accent-color);
+}
+
+.memory-card.matched {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    cursor: default;
+}
+
+.secondary-btn {
+    background: var(--bg-color);
+    border: 1px solid var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+}
+
+/* Math Game */
+.math-problem {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.math-options {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.math-btn {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    background: var(--bg-color);
+    cursor: pointer;
+    min-width: 100px;
+    transition: all 0.2s;
+}
+
+.math-btn:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.feedback-message {
+    height: 2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Breathe Exercise */
+.breathing-circle-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breath-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 50%;
+    opacity: 0.2;
+    transform: scale(0.5);
+}
+
+.breath-circle.animate {
+    animation: breathe 8s infinite ease-in-out;
+}
+
+.breath-text {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(0.5);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .app-header {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .clock-display {
+        font-size: 1.2rem;
+    }
+
+    #main-container {
+        padding: 1rem;
+    }
+
+    .welcome-text {
+        font-size: 2rem;
+    }
+
+    .memory-board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Word Scramble */
+.scramble-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.scramble-slots {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 60px;
+    border-bottom: 2px solid var(--text-secondary);
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.letter-tile {
+    width: 50px;
+    height: 50px;
+    background: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s;
+    box-shadow: var(--shadow-soft);
+}
+
+.letter-tile:hover {
+    transform: translateY(-2px);
+}
+
+.letter-tile.placed {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* Sequence Game */
+.sequence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 300px;
+    margin-bottom: 1rem;
+}
+
+.seq-btn {
+    aspect-ratio: 1;
+    background: var(--btn-color);
+    opacity: 0.4;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.seq-btn:active,
+.seq-btn.active {
+    opacity: 1;
+    transform: scale(0.95);
+    box-shadow: 0 0 20px var(--btn-color);
+}
+
+/* Journal */
+.journal-input {
+    width: 100%;
+    height: 300px;
+    padding: 1rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    resize: none;
+    outline: none;
+    background: #FAFAFA;
+}
+
+.journal-input:focus {
+    border-color: var(--accent-color);
+    background: white;
+}
+
+/* Icon Button */
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Focus Game */
+.focus-word {
+    font-size: 5rem;
+    font-weight: 900;
+    margin: 2rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Reflex Game */
+.reflex-bubble {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    user-select: none;
+}
+
+.reflex-bubble:active {
+    transform: scale(0.9);
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Resource List */
+.resource-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resource-item {
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.resource-item h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.resource-item p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.resource-item a {
+    display: inline-block;
+    color: white;
+    background: var(--accent-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.resource-item a:hover {
+    background: var(--accent-hover);
+}
